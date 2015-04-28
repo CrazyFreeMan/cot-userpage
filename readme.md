@@ -1,21 +1,32 @@
-# User pages 1.0
+# User pages 2.0
 
 UA
 ===
 
-Розширення дозволяє відфільтрувати сторінки в категорії і показати тільки конкретного автора. В налаштуванні можна вказати це доступно всім чи тільки автору.
+Розширення дозволяє показати сторінки по категоріям на сторінці профілю автора як Projects && Market.(Розроблено для FL від CMSWorks.ru)
 
 ### Інструкція по установці:
 
 1. Завантажити і розпакувати вміст архіву, скопіювати файли в папку plugins.
 2. Встановити через панель: (Управління сайтом / Розширення / User pages).
-3. Увімкнути потрібний параметр в адмінці.
-4. Додати по необхідності в шаблоні page.list.tpl тег {LIST_USERPAGES}
+3. Додати в user.details.tpl теги {USERPAGE}, {USERS_DETAILS_PAGE_URL}, {USERS_DETAILS_PAGE_COUNT}
+4.  Створіть власні шаблони для кождоної групи користувачів, назва шаблону має бути userpage.details.4.tpl, де 4 - ID групи.
 
-Для формуваня посилання потрібно додати authorid = ід_автора, приклад для фільтру всіх публікацій в категорії news
 
-```html 
-<a href={PHP.usr.id|cot_url('page','c=news&authorid='$this)}>{PHP.L.show_my_pages}</a>
+Приклад корректного шаблону в  списку вкладок:
+
+```html
+<!-- IF {PHP.cot_plugins_active.userpage} -->
+<li<!-- IF {PHP.tab} == 'userpage' --> class="active"<!-- ENDIF -->><a href="{USERS_DETAILS_PAGE_URL}#tab_userpage" data-toggle="tab">{PHP.L.userpage_userpage}  {USERS_DETAILS_PAGE_COUNT}</a></li>
+<!-- ENDIF -->
+```
+
+Приклад корректного шаблону в табах:
+
+```html
+<div class="tab-pane<!-- IF {PHP.tab} == 'userpage' --> active<!-- ENDIF -->" id="tab_userpage">
+    {USERPAGE}
+</div>
 ```
 
 Розширення налаштовано для [GitHub Check](https://github.com/CrazyFreeMan/cot-githubcheckupdate)
@@ -23,19 +34,29 @@ UA
 RU
 ===
 
-Плагин позволяет отфильтровать страницы в категории и показать только определенного автора. В настройках можна указать доступно это всем или только автору
+Плагин позволяет показать на странице пользователя список его страниц по категориям как Projects && Market.(Разработано для FL от CMSWorks.ru)
 
 ### Установка:
 
 1. Загрузить и распаковать файли в папку plugins.
 2. Установить через панель: (Управленние сайтом / Расширения / User pages).
-3. Включить необходимый параметр в админке.
-4. Добавить по необходимости в шаблоне page.list.tpl тег {LIST_USERPAGES}
+3. Добавить в user.details.tpl теги {USERPAGE}, {USERS_DETAILS_PAGE_URL}, {USERS_DETAILS_PAGE_COUNT}
+4. Создайте собственные шаблоны для каждой группы пользователей, название шаблона userpage.details.4.tpl, где 4 - ID группы.
 
-Для формирования ссылки нужно добавить authorid = ид_автора, пример для фильтра всех публикаций в категории news
+Пример интеграции шаблона в списке вкладок:
 
-```html 
-<a href={PHP.usr.id|cot_url('page','c=news&authorid='$this)}>{PHP.L.show_my_pages}</a>
+```html
+<!-- IF {PHP.cot_plugins_active.userpage} -->
+<li<!-- IF {PHP.tab} == 'userpage' --> class="active"<!-- ENDIF -->><a href="{USERS_DETAILS_PAGE_URL}#tab_userpage" data-toggle="tab">{PHP.L.userpage_userpage}  {USERS_DETAILS_PAGE_COUNT}</a></li>
+<!-- ENDIF -->
+```
+
+Пример интеграции шаблона в табах:
+
+```html
+<div class="tab-pane<!-- IF {PHP.tab} == 'userpage' --> active<!-- ENDIF -->" id="tab_userpage">
+    {USERPAGE}
+</div>
 ```
 
 Плагин настроен для [GitHub Check](https://github.com/CrazyFreeMan/cot-githubcheckupdate)

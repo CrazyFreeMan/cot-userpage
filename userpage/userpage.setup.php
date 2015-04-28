@@ -4,8 +4,8 @@
 Code=userpage
 Name=User pages
 Description=Show only my page in list
-Version=1.0.0
-Date=2015-04-23
+Version=2.0.0
+Date=2015-04-28
 Author=CrazyFreeMan
 Copyright=&copy; CrazyFreeMan (simple-website.in.ua), 2015
 Notes=Ready for Github Check
@@ -20,7 +20,7 @@ Recommends_plugins=
 [END_COT_EXT]
 
 [BEGIN_COT_EXT_CONFIG]
-only_for_author=01:radio:0,1:1
 githubcheck=01:hidden::userpage|CrazyFreeMan|cot-userpage|userpage
+up_maxrowsperpage=02:select:5,10,15,20,25,30,40,50,70:15
 [END_COT_EXT_CONFIG]
 ==================== */
