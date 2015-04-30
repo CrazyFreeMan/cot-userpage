@@ -39,7 +39,7 @@
 				<!-- IF {PAGENAV_COUNT} > 0 -->	
 					<div class="pagination"><ul>{PAGENAV_PAGES}</ul></div>
 				<!-- ELSE -->
-					<div class="alert">{PHP.L.market_empty}</div>
+					<div class="alert">{PHP.L.userpage_empty}</div>
 				<!-- ENDIF -->
 </div>
 <!-- END: MAIN -->
