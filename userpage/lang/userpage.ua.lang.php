@@ -13,3 +13,4 @@ $L['cfg_up_maxrowsperpage'] = array('Кількість на одній стор
  * Main strings
  */
 $L['userpage_userpage'] = 'Сторінки';
+$L['userpage_empty'] = 'Сторінки відсутні';
