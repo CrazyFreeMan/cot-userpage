@@ -13,3 +13,4 @@ $L['cfg_up_maxrowsperpage'] = array('Количество на одной стр
  * Main strings
  */
 $L['userpage_userpage'] = 'Страницы';
+$L['userpage_empty'] = 'Страницы отсутствуют';
