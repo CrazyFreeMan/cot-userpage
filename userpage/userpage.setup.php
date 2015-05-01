@@ -4,7 +4,7 @@
 Code=userpage
 Name=User pages
 Description=Show only my page in list
-Version=2.0.0
+Version=2.0.1
 Date=2015-04-28
 Author=CrazyFreeMan
 Copyright=&copy; CrazyFreeMan (simple-website.in.ua), 2015

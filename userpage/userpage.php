@@ -12,7 +12,7 @@ require_once cot_incfile('page', 'module');
 list($usr['auth_read'], $usr['auth_write'], $usr['isadmin']) = cot_auth('userpage', 'any', 'RWA');
 list($pg, $d, $durl) = cot_import_pagenav('duserpage', $cfg['plugin']['userpage']['up_maxrowsperpage']);
 $tab = cot_import('tab', 'G', 'ALP');
-$category = cot_import('cat', 'G', 'TXT');
+$category = ($tab=='userpage') ? cot_import('cat', 'G', 'TXT') : '' ;
 
 //userpage вкладка
 $t1 = new XTemplate(cot_tplfile(array('userpage','details',$urr['user_maingrp']), 'plug'));
@@ -44,9 +44,9 @@ $wherecount = ($wherecount) ? 'WHERE ' . implode(' AND ', $wherecount) : ''; // 
 $order = ($order) ? 'ORDER BY ' . implode(', ', $order) : '';
 
 $userpage_count = $db->query("SELECT page_cat, COUNT(page_cat) as cat_count FROM $db_pages " . $wherecount . " GROUP BY page_cat")->fetchAll();
-
 // формуємо список категорій і кількість сторінок в них
 foreach ($userpage_count as $value) {
+	$userpage_count_all+=$value['cat_count'];
 	$page_nav[$value['page_cat']] = $value['cat_count'];
 	$t1->assign(array(
 		"PAGE_ROW_CAT_TITLE" => &$structure['page'][$value['page_cat']]['title'],
@@ -57,25 +57,14 @@ foreach ($userpage_count as $value) {
 		));
 	$t1->parse("MAIN.CATEGORY_ROWS");
 }
-
-/* ЗАгальна кількість сторінок для заголовку */
-$all_count = $dcount = $db->query("SELECT * FROM $db_pages " . $wherecount)->rowCount();
-
-
 /* Вибірка списку у відповідності  до категорії */
 $sqllist_rowset = $db->query("SELECT * FROM $db_pages " . $where . " " . $order ." LIMIT $d, ".$cfg['plugin']['userpage']['up_maxrowsperpage'])->fetchAll();
 
 foreach ($sqllist_rowset as $item)
 {
-	$category_tmp[$item['page_cat']]++;
-	if($category && $category != $item['page_cat'])
-		continue;
-
 	$t1->assign(cot_generate_pagetags($item,'PAGE_ROW_', $cfg['page']['truncatetext'], $usr['isadmin']));
 	$t1->parse("MAIN.PAGE_ROWS");
 }
-
-
 // прорахувати для пагинації
 $opt_array = array(
 					'm' => 'details',
@@ -83,12 +72,10 @@ $opt_array = array(
 				  	'u'=> $urr['user_name'],
 				    'tab' => 'userpage'
 				    );
-if($category){
-	
+if($category){	
 	$dcount = $page_nav[$category];
 	$opt_array['cat'] = $category;
 }
-
 $pagenav = cot_pagenav('users', $opt_array, $d, $dcount, $cfg['plugin']['userpage']['up_maxrowsperpage'], 'duserpage');
 
 $t1->assign(array(
@@ -99,7 +86,7 @@ $t1->assign(array(
 ));
 $t1->parse("MAIN");
 $t->assign(array(
-	"USERS_DETAILS_PAGE_COUNT" => $all_count,
+	"USERS_DETAILS_PAGE_COUNT" => $userpage_count_all,
 	"USERS_DETAILS_PAGE_URL" => cot_url('users', 'm=details&id=' . $urr['user_id'] . '&u=' . $urr['user_name'] . '&tab=userpage'),
 ));
 $t->assign('USERPAGE', $t1->text("MAIN"));
