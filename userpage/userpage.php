@@ -72,6 +72,7 @@ $opt_array = array(
 				  	'u'=> $urr['user_name'],
 				    'tab' => 'userpage'
 				    );
+$dcount = $userpage_count_all;
 if($category){	
 	$dcount = $page_nav[$category];
 	$opt_array['cat'] = $category;
