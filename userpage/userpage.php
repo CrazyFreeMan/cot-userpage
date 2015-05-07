@@ -60,6 +60,9 @@ foreach ($userpage_count as $value) {
 /* Вибірка списку у відповідності  до категорії */
 $sqllist_rowset = $db->query("SELECT * FROM $db_pages " . $where . " " . $order ." LIMIT $d, ".$cfg['plugin']['userpage']['up_maxrowsperpage'])->fetchAll();
 
+$cfg['page']['truncatetext'] = (!$category) ?
+	$cfg['page']['cat___default']['truncatetext'] :
+	$cfg['page']['cat_' . $category]['truncatetext'];
 foreach ($sqllist_rowset as $item)
 {
 	$t1->assign(cot_generate_pagetags($item,'PAGE_ROW_', $cfg['page']['truncatetext'], $usr['isadmin']));
