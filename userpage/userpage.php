@@ -21,6 +21,7 @@ $where = array();
 $order = array();
 
 $where['ownerid'] = "page_ownerid=" . $urr['user_id'];
+$where['system'] = "page_cat !='system'";
 $order['date'] = "page_date DESC";
 
 //якщо інформацію переглядає не власник чи адмін то показуємо тільки опубліковані сторінки
