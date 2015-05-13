@@ -62,3 +62,5 @@ RU
 Плагин настроен для [GitHub Check](https://github.com/CrazyFreeMan/cot-githubcheckupdate)
 
 Розробник: Ярослав Романенко (yaroslav.romanenko@gmail.com)
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/CrazyFreeMan/cot-userpage/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
